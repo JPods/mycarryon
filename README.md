@@ -1,4 +1,5 @@
 # MyCarryon
 Open Standard for Universal Identity & Preference Portability
 
-https://mycarryon.io
+Spec: https://mycarryon.io
+Companion guide: https://mycarryon.ai
