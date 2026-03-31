@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyCarryon — Your Identity, Your Terms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a18;
+    --ink-2: #4a4a45;
+    --ink-3: #8a8a82;
+    --paper: #f7f5f0;
+    --paper-2: #edeae2;
+    --accent: #2d6a4f;
+    --accent-light: #d8f3dc;
+    --accent-2: #1b4332;
+    --gold: #b7791f;
+    --gold-light: #fef3c7;
+    --border: rgba(26,26,24,0.12);
+    --sans: 'DM Sans', sans-serif;
+    --serif: 'DM Serif Display', serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(247,245,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink-2);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--accent-2); }
+
+  /* SECTIONS */
+  section { padding: 6rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 8rem;
+    max-width: 100%;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 2rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 24px; height: 1.5px;
+    background: var(--accent);
+  }
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    max-width: 14ch;
+    margin-bottom: 2rem;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--ink-2);
+    max-width: 52ch;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    font-family: var(--sans);
+    font-size: 0.9375rem; font-weight: 500;
+    color: var(--paper); background: var(--ink);
+    padding: 0.875rem 2rem; border-radius: 100px;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--accent-2); transform: translateY(-1px); }
+  .btn-secondary {
+    font-family: var(--sans);
+    font-size: 0.9375rem; font-weight: 500;
+    color: var(--ink); background: transparent;
+    padding: 0.875rem 2rem; border-radius: 100px;
+    text-decoration: none; border: 1.5px solid var(--border);
+    transition: border-color 0.2s, transform 0.1s;
+  }
+  .btn-secondary:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+  .hero-scroll {
+    margin-top: 5rem;
+    display: flex; align-items: center; gap: 1rem;
+    color: var(--ink-3); font-size: 0.8125rem; letter-spacing: 0.05em;
+  }
+  .hero-scroll::after {
+    content: '';
+    display: block; width: 48px; height: 1px;
+    background: var(--ink-3);
+  }
+
+  /* CONCEPT BAR */
+  .concept-bar {
+    background: var(--ink);
+    padding: 2rem 2.5rem;
+    overflow: hidden;
+  }
+  .concept-bar-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .concept-item { border-left: 2px solid var(--accent); padding-left: 1.25rem; }
+  .concept-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.25rem;
+  }
+  .concept-text {
+    font-size: 0.9375rem; color: rgba(247,245,240,0.75); font-weight: 300;
+  }
+
+  /* WHAT IS */
+  .what-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: start;
+  }
+  .section-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  .section-headline {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .section-body {
+    font-size: 1.0625rem; font-weight: 300; color: var(--ink-2);
+    line-height: 1.75; margin-bottom: 1.25rem;
+  }
+  .not-list { list-style: none; margin-top: 1.5rem; }
+  .not-list li {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    font-size: 0.9375rem; color: var(--ink-2);
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .not-list li:last-child { border-bottom: none; }
+  .not-list .x {
+    font-size: 0.75rem; font-weight: 500;
+    color: #c0392b; flex-shrink: 0;
+    width: 16px; text-align: center;
+  }
+  .not-list .check {
+    font-size: 0.75rem; font-weight: 500;
+    color: var(--accent); flex-shrink: 0;
+    width: 16px; text-align: center;
+  }
+
+  /* HOW IT WORKS */
+  .how-section { background: var(--paper-2); padding: 6rem 2.5rem; }
+  .how-inner { max-width: 1100px; margin: 0 auto; }
+  .steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; margin-top: 4rem;
+  }
+  .step { position: relative; }
+  .step::after {
+    content: '';
+    position: absolute; top: 1.5rem; left: calc(100% + 0.5rem);
+    width: calc(100% - 1rem); height: 1px;
+    background: var(--border);
+  }
+  .step:last-child::after { display: none; }
+  .step-num {
+    font-family: var(--serif); font-size: 3rem;
+    color: var(--paper-2); -webkit-text-stroke: 1.5px var(--border);
+    line-height: 1; margin-bottom: 1rem;
+  }
+  .step-title {
+    font-weight: 500; font-size: 1rem;
+    margin-bottom: 0.5rem; color: var(--ink);
+  }
+  .step-body { font-size: 0.875rem; color: var(--ink-2); font-weight: 300; line-height: 1.6; }
+
+  /* USE CASES */
+  .use-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .use-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .use-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .use-icon {
+    width: 40px; height: 40px;
+    background: var(--accent-light);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+  .use-title { font-weight: 500; font-size: 1rem; margin-bottom: 0.375rem; }
+  .use-body { font-size: 0.875rem; color: var(--ink-2); font-weight: 300; line-height: 1.6; }
+
+  /* SCHEMA */
+  .schema-section { background: var(--ink); padding: 6rem 2.5rem; }
+  .schema-inner { max-width: 1100px; margin: 0 auto; }
+  .schema-section .section-label { color: var(--accent); }
+  .schema-section .section-headline { color: var(--paper); }
+  .schema-section .section-body { color: rgba(247,245,240,0.6); }
+  .schema-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; align-items: start; }
+  .schema-fields { list-style: none; }
+  .schema-field {
+    display: flex; align-items: baseline; gap: 1rem;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid rgba(247,245,240,0.08);
+  }
+  .schema-field:first-child { border-top: 1px solid rgba(247,245,240,0.08); }
+  .field-key {
+    font-family: var(--mono); font-size: 0.875rem;
+    color: var(--accent); flex-shrink: 0; width: 120px;
+  }
+  .field-desc { font-size: 0.875rem; color: rgba(247,245,240,0.55); font-weight: 300; }
+  pre {
+    background: rgba(247,245,240,0.05);
+    border: 1px solid rgba(247,245,240,0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: rgba(247,245,240,0.8);
+    overflow-x: auto;
+  }
+  .key { color: #7ec8a0; }
+  .val { color: #f0c070; }
+  .cmt { color: rgba(247,245,240,0.3); font-style: italic; }
+
+  /* PRINCIPLES */
+  .principles {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .principle {
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--paper);
+  }
+  .principle-num {
+    font-family: var(--serif); font-size: 2rem;
+    color: var(--accent); margin-bottom: 0.75rem; line-height: 1;
+  }
+  .principle-title { font-weight: 500; margin-bottom: 0.375rem; }
+  .principle-body { font-size: 0.875rem; color: var(--ink-2); font-weight: 300; line-height: 1.6; }
+
+  /* ORIGIN */
+  .origin-section { background: var(--accent-light); padding: 6rem 2.5rem; }
+  .origin-inner { max-width: 1100px; margin: 0 auto; }
+  .origin-quote {
+    font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.35; letter-spacing: -0.02em;
+    color: var(--accent-2); max-width: 38ch;
+    margin-bottom: 2rem;
+  }
+  .origin-body { font-size: 1rem; color: var(--accent-2); font-weight: 300; max-width: 60ch; line-height: 1.75; }
+  .origin-tag {
+    display: inline-block; margin-top: 1.5rem;
+    font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.05em;
+    color: var(--accent); text-transform: uppercase;
+  }
+
+  /* CTA */
+  .cta-section {
+    text-align: center; padding: 8rem 2.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .cta-headline {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -0.03em; line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .cta-sub {
+    font-size: 1.125rem; color: var(--ink-2); font-weight: 300;
+    max-width: 48ch; margin: 0 auto 3rem;
+  }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.8125rem; color: var(--ink-3);
+  }
+  footer a { color: var(--ink-3); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+  .footer-links { display: flex; gap: 1.5rem; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+  .hero-headline { animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
+
+
+  /* SOVEREIGNTY */
+  .sovereignty-section { background: var(--ink); padding: 6rem 2.5rem; }
+  .sovereignty-inner { max-width: 1100px; margin: 0 auto; }
+  .sovereignty-section .section-label { color: var(--accent); }
+  .sovereignty-section .section-headline { color: var(--paper); margin-bottom: 1rem; }
+  .sovereignty-section .section-body { color: rgba(247,245,240,0.65); max-width: 60ch; }
+  .usufruct { color: #6fcf97; font-style: italic; }
+  .sovereignty-pull {
+    border-left: 3px solid var(--accent);
+    padding: 1.25rem 1.75rem; margin: 2.5rem 0;
+    background: rgba(247,245,240,0.05);
+  }
+  .sovereignty-pull p {
+    font-size: 1.125rem; font-style: italic; font-weight: 300;
+    color: rgba(247,245,240,0.8); line-height: 1.65; margin-bottom: 0.5rem;
+  }
+  .sovereignty-pull cite {
+    font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.04em;
+    color: var(--accent); font-style: normal;
+  }
+  .sovereignty-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .sovereignty-card {
+    border: 1px solid rgba(247,245,240,0.12);
+    border-radius: 8px; padding: 1.5rem;
+    background: rgba(247,245,240,0.04);
+  }
+  .sovereignty-card-domain {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;
+  }
+  .sovereignty-card-title { font-weight: 500; font-size: 1rem; color: var(--paper); margin-bottom: 0.375rem; }
+  .sovereignty-card-body { font-size: 0.875rem; font-weight: 300; color: rgba(247,245,240,0.55); line-height: 1.6; }
+  .sovereignty-card a { color: var(--accent); text-decoration: none; }
+  .sovereignty-card a:hover { color: var(--paper); }
+  .sovereignty-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
+  .sovereignty-link {
+    font-size: 0.875rem; font-weight: 500;
+    color: rgba(247,245,240,0.6); text-decoration: none;
+    padding: 0.5rem 1rem; border: 1px solid rgba(247,245,240,0.15);
+    border-radius: 100px; transition: border-color 0.2s, color 0.2s;
+  }
+  .sovereignty-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .what-grid, .schema-grid, .steps, .sovereignty-grid { grid-template-columns: 1fr; }
+    .use-grid, .principles { grid-template-columns: 1fr; }
+    .concept-bar-inner { grid-template-columns: 1fr; }
+    .step::after { display: none; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">mycarryon</a>
+  <ul class="nav-links">
+    <li><a href="#what">What it is</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#schema">Schema</a></li>
+    <li><a href="#principles">Principles</a></li>
+    <li><a href="#sovereignty">Sovereignty</a></li>
+  </ul>
+  <a href="https://github.com/mycarryon/spec" class="nav-cta" target="_blank">View on GitHub</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-eyebrow">Open Standard · v1.1</span>
+  <h1 class="hero-headline">Your identity.<br><em>Your terms.</em></h1>
+  <p class="hero-sub">MyCarryon is an open standard for a portable, owner-controlled identity and preference container. Carry what you need. Leave the rest behind.</p>
+  <div class="hero-actions">
+    <a href="#schema" class="btn-primary">Read the spec</a>
+    <a href="https://github.com/mycarryon/spec" class="btn-secondary" target="_blank">GitHub →</a>
+  </div>
+  <div class="hero-scroll">Scroll to explore</div>
+</div>
+
+<!-- CONCEPT BAR -->
+<div class="concept-bar">
+  <div class="concept-bar-inner">
+    <div class="concept-item">
+      <div class="concept-label">Not a passport</div>
+      <div class="concept-text">Passports are issued by authorities. Your carryon is packed by you.</div>
+    </div>
+    <div class="concept-item">
+      <div class="concept-label">Not a wallet</div>
+      <div class="concept-text">Wallets hold payments. Your carryon holds identity, preferences, and context.</div>
+    </div>
+    <div class="concept-item">
+      <div class="concept-label">Not a profile</div>
+      <div class="concept-text">Profiles are owned by platforms. Your carryon belongs to you — always.</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT IS -->
+<section id="what">
+  <div class="what-grid">
+    <div>
+      <div class="section-label">What it is</div>
+      <h2 class="section-headline">Everything you need. Nothing you don't.</h2>
+      <p class="section-body">A carryon is a portable JSON container that holds the minimum context needed to interact with any compliant system — on your terms, not the system's.</p>
+      <p class="section-body">Your AI companion packs it. You carry it. You decide who sees it. When you're done, you take it home.</p>
+      <p class="section-body">Raw data stays at the system. Summaries come back to you.</p>
+    </div>
+    <div>
+      <ul class="not-list">
+        <li><span class="x">✕</span> Issued by an authority you don't control</li>
+        <li><span class="x">✕</span> Owned by a platform or vendor</li>
+        <li><span class="x">✕</span> Locked to a single domain (payments, travel, health)</li>
+        <li><span class="x">✕</span> Static and unchangeable</li>
+        <li><span class="x">✕</span> Shared without your consent</li>
+      </ul>
+      <ul class="not-list" style="margin-top: 1rem;">
+        <li><span class="check">✓</span> Packed and managed by you or your AI companion</li>
+        <li><span class="check">✓</span> Works across any compliant system</li>
+        <li><span class="check">✓</span> Minimal by design — carries what's needed</li>
+        <li><span class="check">✓</span> Extensible — you decide what goes in it</li>
+        <li><span class="check">✓</span> Encryption-ready for sensitive sections</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="how-section">
+  <div class="how-inner">
+    <div class="section-label">How it works</div>
+    <h2 class="section-headline">Four steps. Any system. Every time.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Pack</div>
+        <div class="step-body">Your AI companion packs the carryon with your uuid, preferences, and allowed API paths.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Present</div>
+        <div class="step-body">You present the carryon to a compliant system. It reads what it needs — nothing more.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Transact</div>
+        <div class="step-body">The system uses your uuid to authenticate and assigns its own internal id for the session.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">Sync home</div>
+        <div class="step-body">A summary returns to your carryon. Raw data stays at the system. Your companion ingests the summary.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- USE CASES -->
+<section id="usecases">
+  <div class="section-label">Use cases</div>
+  <h2 class="section-headline">One carryon. Every domain.</h2>
+  <div class="use-grid">
+    <div class="use-card">
+      <div class="use-icon">🚊</div>
+      <div class="use-title">Transit</div>
+      <div class="use-body">Ride any JPods network in any city. Your uuid travels with you. Fare summaries sync home.</div>
+    </div>
+    <div class="use-card">
+      <div class="use-icon">🏨</div>
+      <div class="use-title">Travel & hospitality</div>
+      <div class="use-body">Check into hotels with your room preferences already known. No forms, no repetition.</div>
+    </div>
+    <div class="use-card">
+      <div class="use-icon">🏥</div>
+      <div class="use-title">Healthcare</div>
+      <div class="use-body">Carry allergies and emergency contacts to any provider. Visit summaries come home to you.</div>
+    </div>
+    <div class="use-card">
+      <div class="use-icon">🛒</div>
+      <div class="use-title">Commerce</div>
+      <div class="use-body">Shop anywhere with payment preferences and shipping details ready. Order summaries sync back.</div>
+    </div>
+    <div class="use-card">
+      <div class="use-icon">🎓</div>
+      <div class="use-title">Education</div>
+      <div class="use-body">Carry credentials and learning preferences. Completion records return to your knowledge base.</div>
+    </div>
+    <div class="use-card">
+      <div class="use-icon">⚙️</div>
+      <div class="use-title">Any system</div>
+      <div class="use-body">If it can read a JSON file and honor the standard, it can work with your carryon.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEMA -->
+<div class="schema-section" id="schema">
+  <div class="schema-inner">
+    <div class="section-label">The schema</div>
+    <h2 class="section-headline" style="color: var(--paper);">Simple. Extensible. Yours.</h2>
+    <p class="section-body">The carryon is a JSON file. Here's what it contains — and what each section means.</p>
+    <div class="schema-grid">
+      <ul class="schema-fields">
+        <li class="schema-field"><span class="field-key">identity</span><span class="field-desc">Your uuid, name, and home system. Stable across all systems.</span></li>
+        <li class="schema-field"><span class="field-key">contact</span><span class="field-desc">Phones, emails, vcard, emergency contacts, and authorizations for people and systems.</span></li>
+        <li class="schema-field"><span class="field-key">medical</span><span class="field-desc">Blood type, allergies, medications, conditions, providers, insurance. High sensitivity.</span></li>
+        <li class="schema-field"><span class="field-key">credentials</span><span class="field-desc">Auth tokens. Plaintext now, AES-256 encrypted in v2.</span></li>
+        <li class="schema-field"><span class="field-key">preferences</span><span class="field-desc">Language, currency, timezone, payment method, notifications.</span></li>
+        <li class="schema-field"><span class="field-key">apis</span><span class="field-desc">Allowed systems and blocked systems. You control the list.</span></li>
+        <li class="schema-field"><span class="field-key">actions</span><span class="field-desc">Tasks and next steps. Connects to external calendars (Google, Apple, Outlook, CalDAV).</span></li>
+        <li class="schema-field"><span class="field-key">log</span><span class="field-desc">Temporary session log. Auto-clears after sync to home companion.</span></li>
+        <li class="schema-field"><span class="field-key">notifications</span><span class="field-desc">Alerts, warnings, and messages queued for the owner. Prioritized and expirable.</span></li>
+        <li class="schema-field"><span class="field-key">dashboards</span><span class="field-desc">Stored views — flagged offline (computes from carryon) or online (requires home db).</span></li>
+        <li class="schema-field"><span class="field-key">pending</span><span class="field-desc">Events not yet synced home. dt_processed=0 until integrated. Same pattern as WebClerk pending.</span></li>
+        <li class="schema-field"><span class="field-key">recent</span><span class="field-desc">Last 50 interactions. Enough to repeat a trip or reorder quickly.</span></li>
+        <li class="schema-field"><span class="field-key">settings</span><span class="field-desc">Allie rules, privacy settings, display preferences, and custom companion config.</span></li>
+        <li class="schema-field"><span class="field-key">sync</span><span class="field-desc">Home companion endpoint. Summaries and pending items route here automatically.</span></li>
+        <li class="schema-field"><span class="field-key">custom</span><span class="field-desc">Yours to define. Add anything meaningful to you.</span></li>
+      </ul>
+      <pre><code><span class="cmt">// carryon.json v1.1</span>
+{
+  <span class="key">"carryon_version"</span>: <span class="val">"1.1"</span>,
+  <span class="key">"identity"</span>: { <span class="key">"uuid"</span>: <span class="val">"550e8400-..."</span> },
+  <span class="key">"contact"</span>: {
+    <span class="key">"vcard"</span>: { <span class="cmt">/* fn, tel, email, adr */</span> },
+    <span class="key">"emergency"</span>: [],
+    <span class="key">"authorizations"</span>: {
+      <span class="key">"people"</span>: [], <span class="key">"systems"</span>: []
+    }
+  },
+  <span class="key">"medical"</span>: {
+    <span class="key">"_sensitivity"</span>: <span class="val">"high"</span>,
+    <span class="key">"allergies"</span>: [], <span class="key">"medications"</span>: []
+  },
+  <span class="key">"actions"</span>: {
+    <span class="key">"items"</span>: [], <span class="key">"calendars"</span>: []
+  },
+  <span class="key">"notifications"</span>: { <span class="key">"items"</span>: [] },
+  <span class="key">"dashboards"</span>: {
+    <span class="key">"items"</span>: [
+      { <span class="key">"mode"</span>: <span class="val">"offline"</span> },
+      { <span class="key">"mode"</span>: <span class="val">"online"</span> }
+    ]
+  },
+  <span class="key">"pending"</span>: { <span class="key">"items"</span>: [], <span class="key">"dt_processed"</span>: <span class="val">0</span> },
+  <span class="key">"log"</span>: { <span class="key">"_retention"</span>: <span class="val">"sync_then_clear"</span> },
+  <span class="key">"settings"</span>: { <span class="key">"allie"</span>: {}, <span class="key">"privacy"</span>: {} },
+  <span class="key">"sync"</span>: { <span class="key">"home_allie_url"</span>: <span class="val">null</span> },
+  <span class="key">"custom"</span>: {}
+}</code></pre>
+    </div>
+  </div>
+</div>
+
+<!-- PRINCIPLES -->
+<section id="principles">
+  <div class="section-label">Design principles</div>
+  <h2 class="section-headline">Built on eight commitments.</h2>
+  <div class="principles">
+    <div class="principle">
+      <div class="principle-num">01</div>
+      <div class="principle-title">Owner-packed</div>
+      <div class="principle-body">Only you or your companion packs the carryon. No authority assigns it. No platform owns it.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">02</div>
+      <div class="principle-title">Minimal footprint</div>
+      <div class="principle-body">Carry summaries, not raw data. The carryon grows with your interactions, not with surveillance.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">03</div>
+      <div class="principle-title">Universal structure</div>
+      <div class="principle-body">Any compliant system can read a carryon. The standard is open and vendor-neutral.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">04</div>
+      <div class="principle-title">Voluntary presentation</div>
+      <div class="principle-body">You decide when to present your carryon and to whom. Blocked systems are refused.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">05</div>
+      <div class="principle-title">Async sync</div>
+      <div class="principle-body">Detailed data stays at the system. Summaries flow back to your companion on reconnect.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">06</div>
+      <div class="principle-title">Encryption-ready</div>
+      <div class="principle-body">The credentials section is designed for AES-256 encryption. Plaintext now, secured in v2.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">07</div>
+      <div class="principle-title">Human in the loop</div>
+      <div class="principle-body">Your AI companion manages the carryon. You make the decisions about what it contains.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-num">08</div>
+      <div class="principle-title">Non-destructive</div>
+      <div class="principle-body">Interactions are summarized and archived. Nothing is silently deleted from your carryon.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<div class="origin-section">
+  <div class="origin-inner">
+    <div class="section-label" style="color: var(--accent);">Origin story</div>
+    <p class="origin-quote">"We needed a way for a person to ride transit in any city — recognized, served, and private."</p>
+    <p class="origin-body">MyCarryon was conceived for JPods, a solar-powered personal rapid transit network designed to operate Bottom-Up — like WiFi — where each city manages its own database independently. A rider shouldn't have to create an account in every city they visit. Their uuid travels with them. The local system handles the rest. Summaries come home.</p>
+    <p class="origin-body" style="margin-top: 1rem;">The same pattern applies everywhere a person moves between independent systems. Transit. Hotels. Healthcare. Commerce. The carryon is the universal solution.</p>
+    <span class="origin-tag">JPods · WebClerk · Bottom-Up Networks</span>
+  </div>
+</div>
+
+
+<!-- SOVEREIGNTY -->
+<div class="sovereignty-section" id="sovereignty">
+  <div class="sovereignty-inner">
+    <div class="section-label">Personal sovereignty standard</div>
+    <h2 class="section-headline">A written constitution<br>for your digital identity.</h2>
+    <p class="section-body" style="margin-bottom:1.5rem;">The carryon is not just a convenience. It is an instrument of individual sovereignty — a written document that constrains what institutions may do with your identity, your data, and your presence in the world.</p>
+
+    <div class="sovereignty-pull">
+      <p>"What has destroyed liberty and the rights of man in every government which has ever existed under the sun? The generalizing and concentrating all cares and powers into one body."</p>
+      <cite>— Thomas Jefferson, Letter to Joseph C. Cabell, 1816</cite>
+    </div>
+
+    <p class="section-body" style="margin-bottom:1.5rem;">Platform monopolies violate <span class="usufruct">usufruct</span> (to use for profit without harm) — the ethical principle that any use of a shared resource must be returned in like or better condition for those who follow. They consume your identity, your attention, and your relationships without return. The carryon enforces usufruct at the individual level: you use systems on your terms, they return summaries, your identity comes home intact.</p>
+
+    <p class="section-body">The same consolidation of power that created oil addiction, Federal debt, and oil wars — documented at <a href="https://www.dividedsovereignty.com/digital-sovereignty" target="_blank" style="color:var(--accent);">DividedSovereignty.com</a> — is now happening to your digital identity. The remedy is the same: Divided Sovereignty, usufruct capitalism, and the individual as sovereign.</p>
+
+    <div class="sovereignty-grid">
+      <div class="sovereignty-card">
+        <div class="sovereignty-card-domain">Physical mobility</div>
+        <div class="sovereignty-card-title">JPods</div>
+        <div class="sovereignty-card-body">Bottom-Up, solar-powered, locally governed transit. You own your mobility. <a href="https://www.jpods.com" target="_blank">jpods.com →</a></div>
+      </div>
+      <div class="sovereignty-card">
+        <div class="sovereignty-card-domain">Commerce</div>
+        <div class="sovereignty-card-title">WebClerk</div>
+        <div class="sovereignty-card-body">Bottom-Up commerce infrastructure. Each network locally governed. You own your transactions. <a href="https://www.webclerk.com" target="_blank">webclerk.com →</a></div>
+      </div>
+      <div class="sovereignty-card">
+        <div class="sovereignty-card-domain">Digital identity</div>
+        <div class="sovereignty-card-title">MyCarryon</div>
+        <div class="sovereignty-card-body">The carryon is your written constitution for your digital presence. Enumerated permissions. Right of refusal. Identity that comes home.</div>
+      </div>
+      <div class="sovereignty-card">
+        <div class="sovereignty-card-domain">Constitutional framework</div>
+        <div class="sovereignty-card-title">Divided Sovereignty</div>
+        <div class="sovereignty-card-body">The sovereign is the individual. Governments and platforms are agents with enumerated permissions — not owners. <a href="https://www.dividedsovereignty.com" target="_blank">dividedsovereignty.com →</a></div>
+      </div>
+      <div class="sovereignty-card">
+        <div class="sovereignty-card-domain">Infrastructure rights</div>
+        <div class="sovereignty-card-title">postRoads</div>
+        <div class="sovereignty-card-body">State sovereignty over internal improvements. No Federal monopoly on transportation or digital infrastructure. <a href="https://www.postroads.com" target="_blank">postroads.com →</a></div>
+      </div>
+      <div class="sovereignty-card">
+        <div class="sovereignty-card-domain">Democratic corrective</div>
+        <div class="sovereignty-card-title">Jury with 4-part verdict</div>
+        <div class="sovereignty-card-body">When regulators are captured, citizens must have standing to sue for usufruct violations (to use for profit without harm). Juries assess harm Bottom-Up. <a href="https://www.reportof2026.com" target="_blank">reportof2026.com →</a></div>
+      </div>
+    </div>
+
+    <div class="sovereignty-links">
+      <a href="https://www.dividedsovereignty.com/digital-sovereignty" class="sovereignty-link" target="_blank">Digital Sovereignty essay →</a>
+      <a href="https://www.dividedsovereignty.com" class="sovereignty-link" target="_blank">DividedSovereignty.com →</a>
+      <a href="https://www.postroads.com" class="sovereignty-link" target="_blank">postRoads.com →</a>
+      <a href="https://www.jpods.com" class="sovereignty-link" target="_blank">JPods.com →</a>
+      <a href="https://www.reportof2026.com" class="sovereignty-link" target="_blank">Report of 2026 →</a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2 class="cta-headline">Ready to implement?</h2>
+  <p class="cta-sub">Read the full spec, explore the JSON schema, and build a compliant system. The standard is open. The ecosystem is growing.</p>
+  <div class="cta-actions">
+    <a href="https://github.com/mycarryon/spec" class="btn-primary" target="_blank">View spec on GitHub</a>
+    <a href="https://mycarryon.ai" class="btn-secondary" target="_blank">AI companion guide →</a>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 MyCarryon · Open Standard</span>
+  <div class="footer-links">
+    <a href="https://github.com/mycarryon/spec" target="_blank">GitHub</a>
+    <a href="https://mycarryon.ai" target="_blank">mycarryon.ai</a>
+    <a href="mailto:hello@mycarryon.io">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
